@@ -352,7 +352,7 @@
 - (int)getBufferedPosition {
     if (_processingState == none || _processingState == loading) {
         return 0;
-    } else if (_indexedAudioSources && _indexedAudioSources.count > 0) {
+    } else if (_indexedAudioSources && _indexedAudioSources.count > 0 && _index < _indexedAudioSources.count) {
         int ms = (int)(1000 * CMTimeGetSeconds(_indexedAudioSources[_index].bufferedPosition));
         if (ms < 0) ms = 0;
         return ms;
