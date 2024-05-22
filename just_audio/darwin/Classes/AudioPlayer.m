@@ -331,7 +331,7 @@
             @"bufferedPosition": @((long long)1000 * [self getBufferedPosition]),
             @"icyMetadata": _icyMetadata,
             @"duration": @([self getDurationMicroseconds]),
-            @"currentIndex": @(_index),
+            @"currentIndex": (_index < _indexedAudioSources.count) ? @(_index) : @(-1),
     }];
 }
 
@@ -364,7 +364,7 @@
 - (int)getDuration {
     if (_processingState == none || _processingState == loading) {
         return -1;
-    } else if (_indexedAudioSources && _indexedAudioSources.count > 0) {
+    } else if (_indexedAudioSources && _indexedAudioSources.count > 0 && _index < _indexedAudioSources.count) {
         int v = (int)(1000 * CMTimeGetSeconds(_indexedAudioSources[_index].duration));
         return v;
     } else {
